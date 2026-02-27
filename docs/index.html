@@ -578,15 +578,94 @@
   </div>
 </section>
 
+<!-- LEGAL MODAL -->
+<div id="legal-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;align-items:center;justify-content:center;">
+  <div style="background:#1a1a1a;border:1px solid rgba(212,160,23,0.4);border-radius:16px;max-width:600px;width:90%;padding:40px;max-height:80vh;overflow-y:auto;">
+    <h2 style="color:#D4A017;font-size:22px;margin-bottom:20px;">📋 Terms & Legal Disclaimer</h2>
+    <div style="color:rgba(255,255,255,0.7);font-size:14px;line-height:1.8;max-height:300px;overflow-y:auto;border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:16px;margin-bottom:24px;">
+      <p><strong style="color:white;">END USER LICENSE AGREEMENT — CLAW BACK</strong></p>
+      <br>
+      <p>By downloading and installing Claw Back ("the Software"), you agree to the following terms:</p>
+      <br>
+      <p><strong style="color:white;">1. License Grant.</strong> Claw Back grants you a limited, non-exclusive, non-transferable license to install and use the Software on your personal Mac computer(s) as permitted by your active subscription.</p>
+      <br>
+      <p><strong style="color:white;">2. Subscription & Billing.</strong> Use of Claw Back requires an active paid subscription at $14.99/month or $99/year. A 24-hour free trial is available with a valid credit card on file. Your card will be charged automatically after the trial period unless you cancel. You may cancel at any time.</p>
+      <br>
+      <p><strong style="color:white;">3. System Modifications.</strong> The Software will install, modify, and remove software components on your Mac including but not limited to OpenClaw and Ollama. By proceeding you authorize these system-level changes. Always ensure you have backups of important data before use.</p>
+      <br>
+      <p><strong style="color:white;">4. No Warranty.</strong> The Software is provided "as is" without warranty of any kind. Claw Back is not responsible for data loss, system damage, or any other issues arising from use of the Software.</p>
+      <br>
+      <p><strong style="color:white;">5. Limitation of Liability.</strong> In no event shall Claw Back or its creators be liable for any indirect, incidental, special, or consequential damages arising from your use of the Software.</p>
+      <br>
+      <p><strong style="color:white;">6. Privacy.</strong> The Software collects minimal usage data for license validation purposes only. We do not sell your data to third parties.</p>
+      <br>
+      <p><strong style="color:white;">7. Termination.</strong> Your license terminates automatically upon cancellation or non-payment of your subscription. Upon termination you must cease use of the Software.</p>
+      <br>
+      <p><strong style="color:white;">8. Governing Law.</strong> These terms are governed by applicable law. Any disputes shall be resolved in the jurisdiction where the software creator resides.</p>
+      <br>
+      <p>By clicking "I Agree & Download" you confirm you have read, understood, and agree to these terms.</p>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+      <input type="checkbox" id="legal-agree" style="width:18px;height:18px;accent-color:#D4A017;">
+      <label for="legal-agree" style="color:rgba(255,255,255,0.8);font-size:14px;cursor:pointer;">I have read and agree to the Terms & Legal Disclaimer</label>
+    </div>
+    <div style="display:flex;gap:12px;">
+      <button onclick="closeLegal()" style="flex:1;padding:12px;background:transparent;border:1px solid rgba(255,255,255,0.2);border-radius:8px;color:rgba(255,255,255,0.6);cursor:pointer;font-size:14px;">Cancel</button>
+      <button id="agree-btn" onclick="proceedDownload()" disabled style="flex:2;padding:12px;background:#555;border:none;border-radius:8px;color:#111;font-weight:800;cursor:not-allowed;font-size:15px;transition:all 0.2s;">I Agree & Download</button>
+    </div>
+  </div>
+</div>
+
 <!-- CTA -->
 <section class="cta" id="download">
   <h2>Take back control of your AI setup. 🦞</h2>
   <p>Download Claw Back today and never lose your setup again.</p>
-  <a href="ClawBack-1.0.dmg" class="btn-primary" style="font-size:18px;padding:16px 40px;">🍎 Download for Mac</a>
-  <a href="https://github.com/clawrenceisthebestboy-dev/claw-back-windows/releases/latest/download/ClawBack-Setup.exe" class="btn-secondary" style="font-size:18px;padding:16px 40px;background:rgba(255,255,255,0.05);border:2px solid rgba(255,255,255,0.2);">🪟 Download for Windows</a>
+  <a href="#" onclick="showLegal('mac')" class="btn-primary" style="font-size:18px;padding:16px 40px;">🍎 Download for Mac</a>
+  <a href="#" onclick="showLegal('windows')" class="btn-secondary" style="font-size:18px;padding:16px 40px;background:rgba(255,255,255,0.05);border:2px solid rgba(255,255,255,0.2);">🪟 Download for Windows</a>
   <br><br>
   <p style="font-size:13px;color:rgba(255,255,255,0.25);">macOS 14+ · Apple Silicon · Mac mini M4+</p>
 </section>
+
+<script>
+var downloadTarget = 'mac';
+
+function showLegal(target) {
+  downloadTarget = target;
+  document.getElementById('legal-modal').style.display = 'flex';
+  document.getElementById('legal-agree').checked = false;
+  document.getElementById('agree-btn').disabled = true;
+  document.getElementById('agree-btn').style.background = '#555';
+  document.getElementById('agree-btn').style.cursor = 'not-allowed';
+}
+
+function closeLegal() {
+  document.getElementById('legal-modal').style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('legal-agree').addEventListener('change', function() {
+    var btn = document.getElementById('agree-btn');
+    if (this.checked) {
+      btn.disabled = false;
+      btn.style.background = '#D4A017';
+      btn.style.cursor = 'pointer';
+    } else {
+      btn.disabled = true;
+      btn.style.background = '#555';
+      btn.style.cursor = 'not-allowed';
+    }
+  });
+});
+
+function proceedDownload() {
+  closeLegal();
+  if (downloadTarget === 'mac') {
+    window.location.href = 'ClawBack-1.0.dmg';
+  } else {
+    window.location.href = 'https://github.com/clawrenceisthebestboy-dev/claw-back-windows/releases/latest/download/ClawBack-Setup.exe';
+  }
+}
+</script>
 
 <!-- FOOTER -->
 <footer>
