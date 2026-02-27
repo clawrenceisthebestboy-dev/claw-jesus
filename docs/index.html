@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claw Jesus — Your Mac's Savior</title>
+  <meta name="description" content="One-click install, backup, and restore for OpenClaw + Ollama on Mac mini M4. Never lose your AI setup again.">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #D4A017;
+      --red: #C70000;
+      --dark: #111111;
+      --dark2: #1A1A1A;
+      --dark3: #222222;
+      --white: #F5F5F5;
+      --muted: rgba(255,255,255,0.6);
+    }
+
+    body {
+      background: var(--dark);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(212,160,23,0.2);
+    }
+    .nav-logo {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: -0.5px;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 32px;
+      font-size: 15px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--gold);
+      color: #111 !important;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-weight: 700 !important;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 100px 20px 80px;
+      background: radial-gradient(ellipse at top, #2a1f00 0%, var(--dark) 70%);
+    }
+    .hero-mascot {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 4px solid var(--gold);
+      object-fit: cover;
+      margin-bottom: 32px;
+      box-shadow: 0 0 60px rgba(212,160,23,0.3);
+    }
+    .hero h1 {
+      font-size: 64px;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: -2px;
+      margin-bottom: 16px;
+    }
+    .hero .tagline {
+      font-size: 22px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .hero .subtagline {
+      font-size: 16px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 48px;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: #111;
+      padding: 16px 40px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(212,160,23,0.4);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      padding: 16px 40px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.2);
+      transition: border-color 0.2s;
+      display: inline-block;
+    }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+    .hero-note {
+      margin-top: 20px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* SOCIAL PROOF */
+    .social-proof {
+      text-align: center;
+      padding: 40px 20px;
+      background: var(--dark2);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .social-proof p {
+      color: var(--muted);
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .badges {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    /* FEATURES */
+    .features {
+      padding: 100px 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 60px;
+      letter-spacing: -1px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .feature-card {
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 32px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .feature-card:hover {
+      border-color: rgba(212,160,23,0.4);
+      transform: translateY(-4px);
+    }
+    .feature-icon {
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+    .feature-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--white);
+    }
+    .feature-card p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* HOW IT WORKS */
+    .how {
+      background: var(--dark2);
+      padding: 100px 60px;
+    }
+    .how-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .steps {
+      display: flex;
+      gap: 32px;
+      margin-top: 60px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .step {
+      flex: 1;
+      min-width: 200px;
+      max-width: 240px;
+    }
+    .step-num {
+      width: 52px;
+      height: 52px;
+      background: var(--gold);
+      color: #111;
+      border-radius: 50%;
+      font-size: 22px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .step h4 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .step p { color: var(--muted); font-size: 14px; }
+
+    /* PRICING */
+    .pricing {
+      padding: 100px 60px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .pricing-cards {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      margin-top: 60px;
+      flex-wrap: wrap;
+    }
+    .pricing-card {
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 40px 36px;
+      flex: 1;
+      min-width: 260px;
+      max-width: 320px;
+      position: relative;
+    }
+    .pricing-card.featured {
+      border-color: var(--gold);
+      background: linear-gradient(145deg, #1f1700, var(--dark2));
+    }
+    .featured-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: #111;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 16px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .pricing-card h3 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .price {
+      font-size: 52px;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      margin: 20px 0 4px;
+    }
+    .price span {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--muted);
+    }
+    .price-desc {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+    .pricing-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 32px;
+    }
+    .pricing-features li {
+      padding: 8px 0;
+      color: var(--muted);
+      font-size: 15px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      gap: 10px;
+    }
+    .pricing-features li::before { content: "✓"; color: var(--gold); font-weight: 700; }
+
+    /* TESTIMONIALS */
+    .testimonials {
+      background: var(--dark2);
+      padding: 100px 60px;
+    }
+    .testimonials-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 60px;
+    }
+    .testimonial {
+      background: var(--dark3);
+      border-radius: 16px;
+      padding: 28px;
+      text-align: left;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .testimonial p {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .testimonial-author {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--gold);
+    }
+    .stars { color: var(--gold); font-size: 16px; margin-bottom: 12px; }
+
+    /* CTA */
+    .cta {
+      text-align: center;
+      padding: 120px 20px;
+      background: radial-gradient(ellipse at center, #2a1f00 0%, var(--dark) 70%);
+    }
+    .cta h2 {
+      font-size: 52px;
+      font-weight: 900;
+      color: var(--gold);
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+    .cta p {
+      font-size: 18px;
+      color: var(--muted);
+      margin-bottom: 48px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #0a0a0a;
+      padding: 40px 60px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    footer p { color: rgba(255,255,255,0.25); font-size: 13px; }
+    footer a { color: var(--gold); text-decoration: none; }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .hero h1 { font-size: 40px; }
+      .features, .how, .pricing, .testimonials { padding: 60px 20px; }
+      footer { padding: 30px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">🦞 Claw Jesus</div>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#how">How It Works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#download" class="nav-cta">Download</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="mascot.jpg" alt="Claw Jesus Mascot" class="hero-mascot">
+  <h1>Claw Jesus</h1>
+  <p class="tagline">Your Mac's AI Setup Savior 🙏</p>
+  <p class="subtagline">One click to install, backup, and restore your entire OpenClaw + Ollama setup.<br>Built for Mac mini M4. No terminal required.</p>
+  <div class="hero-buttons">
+    <a href="#download" class="btn-primary">⬇️ Download Free Trial</a>
+    <a href="#pricing" class="btn-secondary">View Pricing</a>
+  </div>
+  <p class="hero-note">macOS 14+ · Apple Silicon · Mac mini M4 optimized</p>
+</section>
+
+<!-- SOCIAL PROOF -->
+<div class="social-proof">
+  <p>Built for Mac mini M4 users who run local AI</p>
+  <div class="badges">
+    <span class="badge">🍎 Apple Silicon Native</span>
+    <span class="badge">🔒 100% Local</span>
+    <span class="badge">⚡ One-Click Setup</span>
+    <span class="badge">🦞 Blessed by Claw Jesus</span>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <p class="section-label">What It Does</p>
+  <h2 class="section-title">Never lose your AI setup again.</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">⬇️</div>
+      <h3>One-Click Install</h3>
+      <p>Installs OpenClaw and Ollama automatically. No terminal, no Homebrew knowledge required. Just click Install.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📸</div>
+      <h3>Save Snapshots</h3>
+      <p>Capture your entire working setup — configs, models, settings — with a single click. Your insurance policy.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔄</div>
+      <h3>One-Click Reset</h3>
+      <p>Something broke? Hit Reset and watch Claw Jesus restore everything back to your last working state.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🩺</div>
+      <h3>Health Status</h3>
+      <p>See what's installed, what's running, and what version everything is at a glance. No guessing.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔒</div>
+      <h3>100% Local</h3>
+      <p>Everything runs on your Mac. No cloud, no data leaving your machine. Your AI stays yours.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🦞</div>
+      <h3>Blessed Protection</h3>
+      <p>Claw Jesus watches over your setup so you don't have to. He died for your configs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="how-inner">
+    <p class="section-label">Getting Started</p>
+    <h2 class="section-title">Up and running in minutes.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Download</h4>
+        <p>Grab the DMG, drag Claw Jesus to your Applications folder.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Install</h4>
+        <p>Open the app. Hit Install Now. Claw Jesus handles everything.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Snapshot</h4>
+        <p>Save your working state so you always have a fallback.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Relax</h4>
+        <p>He's got your back. One click and you're always restored.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <p class="section-label">Pricing</p>
+  <h2 class="section-title">Simple, honest pricing.</h2>
+  <div class="pricing-cards">
+    <div class="pricing-card">
+      <h3>Free Trial</h3>
+      <div class="price">$0<span>/mo</span></div>
+      <p class="price-desc">Try before you commit</p>
+      <ul class="pricing-features">
+        <li>One-click install</li>
+        <li>Status checker</li>
+        <li>1 snapshot</li>
+        <li>Community support</li>
+      </ul>
+      <a href="#download" class="btn-secondary" style="display:block;text-align:center;padding:12px;">Download Free</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="featured-badge">Most Popular</div>
+      <h3>Monthly</h3>
+      <div class="price">$4.99<span>/mo</span></div>
+      <p class="price-desc">Cancel anytime</p>
+      <ul class="pricing-features">
+        <li>Everything in Free</li>
+        <li>Unlimited snapshots</li>
+        <li>One-click reset</li>
+        <li>Priority support</li>
+        <li>All future updates</li>
+      </ul>
+      <a href="#download" class="btn-primary" style="display:block;text-align:center;padding:12px;">Get Started — $4.99/mo</a>
+    </div>
+    <div class="pricing-card">
+      <h3>Annual</h3>
+      <div class="price">$39<span>/yr</span></div>
+      <p class="price-desc">Save 35% vs monthly</p>
+      <ul class="pricing-features">
+        <li>Everything in Monthly</li>
+        <li>Early access features</li>
+        <li>Dedicated support</li>
+        <li>License for 2 Macs</li>
+      </ul>
+      <a href="#download" class="btn-secondary" style="display:block;text-align:center;padding:12px;">Get Annual</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <p class="section-label">Early Users</p>
+    <h2 class="section-title">They believed.</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"I had my entire AI setup wiped by a bad update. Claw Jesus brought it back in 30 seconds. I cried."</p>
+        <div class="testimonial-author">— Mac mini M4 user, NYC</div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"Finally an app that treats me like a human and not a developer. Zero terminal. Just works."</p>
+        <div class="testimonial-author">— Content creator, LA</div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"$4.99 a month to never stress about my AI setup breaking? That's the best deal I've ever made."</p>
+        <div class="testimonial-author">— Freelancer, Austin TX</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="download">
+  <h2>He died for your configs. 🦞</h2>
+  <p>Download Claw Jesus today and never lose your setup again.</p>
+  <a href="ClawJesus-1.0.dmg" class="btn-primary" style="font-size:20px;padding:20px 56px;">⬇️ Download for Mac</a>
+  <br><br>
+  <p style="font-size:13px;color:rgba(255,255,255,0.25);">macOS 14+ · Apple Silicon · Mac mini M4+</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>🦞 Claw Jesus · Built with love by <a href="#">Lord Viper</a> · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+  <p style="margin-top:8px;">© 2026 Claw Jesus. He saves.</p>
+</footer>
+
+</body>
+</html>
