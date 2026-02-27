@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ — Claw Back</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --gold: #D4A017; --dark: #111111; --dark2: #1A1A1A; --dark3: #222222; --white: #F5F5F5; --muted: rgba(255,255,255,0.6); }
+    body { background: var(--dark); color: var(--white); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.7; }
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 60px; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px);
+      position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(212,160,23,0.2);
+    }
+    .nav-logo { font-size: 22px; font-weight: 800; color: var(--gold); text-decoration: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; margin-left: 32px; font-size: 15px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .hero-banner {
+      background: radial-gradient(ellipse at top, #2a1f00 0%, var(--dark) 70%);
+      text-align: center; padding: 80px 20px 60px;
+    }
+    .hero-banner h1 { font-size: 52px; font-weight: 900; color: var(--gold); margin-bottom: 12px; letter-spacing: -1px; }
+    .hero-banner p { color: var(--muted); font-size: 16px; max-width: 600px; margin: 0 auto; }
+    .faq-section { max-width: 820px; margin: 0 auto; padding: 60px 40px 100px; }
+    .faq-item {
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item:hover { border-color: rgba(212,160,23,0.3); }
+    .faq-question {
+      width: 100%; background: none; border: none; text-align: left;
+      padding: 24px 28px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+      color: var(--white); font-size: 17px; font-weight: 700; gap: 16px;
+    }
+    .faq-question:hover { color: var(--gold); }
+    .faq-icon { color: var(--gold); font-size: 22px; flex-shrink: 0; transition: transform 0.3s; }
+    .faq-answer {
+      max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.2s;
+      padding: 0 28px; color: var(--muted); font-size: 15px;
+    }
+    .faq-answer p { margin-bottom: 12px; }
+    .faq-answer ul { margin: 0 0 12px 20px; }
+    .faq-answer ul li { margin-bottom: 6px; }
+    .faq-answer a { color: var(--gold); text-decoration: none; }
+    .faq-item.open .faq-answer { max-height: 400px; padding: 0 28px 24px; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-num { color: var(--gold); font-size: 14px; font-weight: 900; margin-right: 12px; opacity: 0.7; }
+    .still-questions {
+      text-align: center; background: var(--dark2); border: 1px solid rgba(212,160,23,0.2);
+      border-radius: 20px; padding: 48px 40px; margin-top: 60px;
+    }
+    .still-questions h2 { font-size: 28px; font-weight: 800; color: var(--gold); margin-bottom: 12px; }
+    .still-questions p { color: var(--muted); margin-bottom: 24px; }
+    .btn-primary {
+      background: var(--gold); color: #111; padding: 14px 32px; border-radius: 12px;
+      font-size: 16px; font-weight: 800; text-decoration: none; display: inline-block;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,160,23,0.4); }
+    footer { background: #0a0a0a; padding: 40px 60px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+    footer p { color: rgba(255,255,255,0.25); font-size: 13px; }
+    footer a { color: var(--gold); text-decoration: none; }
+    @media (max-width: 768px) { nav { padding: 16px 20px; } .nav-links { display: none; } .hero-banner h1 { font-size: 36px; } .faq-section { padding: 40px 20px 60px; } footer { padding: 30px 20px; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">🦞 Claw Back</a>
+  <div class="nav-links">
+    <a href="index.html#features">Features</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="waitlist.html">Waitlist</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </div>
+</nav>
+
+<div class="hero-banner">
+  <h1>❓ FAQ</h1>
+  <p>Everything you need to know about Claw Back, in plain English.</p>
+</div>
+
+<div class="faq-section">
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggle(this)">
+      <span><span class="faq-num">01</span>What is Claw Back?</span>
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Claw Back is a macOS app that makes it dead simple to install, snapshot, and restore your local AI setup — specifically OpenClaw and Ollama. Think of it as a safety net for your Mac mini M4 AI workflow.</p>
+      <p>No terminal. No Homebrew fumbling. Just click a button and your setup is locked in. If something breaks (and something always breaks), one click brings everything back to your last working state.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggle(this)">
+      <span><span class="faq-num">02</span>What does Claw Back actually install on my Mac?</span>
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Claw Back can install and manage the following components:</p>
+      <ul>
+        <li><strong>Ollama</strong> — The local LLM runner that powers your AI models</li>
+        <li><strong>OpenClaw</strong> — The AI assistant framework that runs on top of Ollama</li>
+        <li>Any associated CLI tools, configuration files, and startup services needed for these to work</li>
+      </ul>
+      <p>Claw Back itself is a lightweight native macOS app — it doesn't run background processes or daemons beyond what you explicitly install. You're always in control.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggle(this)">
+      <span><span class="faq-num">03</span>Is my data safe? Does Claw Back upload my files?</span>
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Your data never leaves your Mac. Claw Back is a local-first app — all snapshots, configs, and model data stay on your machine. We have no servers that receive or store your AI setup or files.</p>
+      <p>The only information we collect is your email address (for your account), your license key, and a machine ID hash used solely to validate your subscription. We don't sell data. We don't use ad trackers. See our <a href="privacy.html">Privacy Policy</a> for the full breakdown.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggle(this)">
+      <span><span class="faq-num">04</span>What happens if I cancel my subscription?</span>
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>You keep access until the end of your current billing period. After that, the app will stop functioning for new operations, but anything already installed on your Mac stays installed — Ollama and OpenClaw won't be removed.</p>
+      <p>You can reactivate at any time to regain full access. To cancel, email <a href="mailto:support@clawback.app">support@clawback.app</a> or use the link in your account dashboard.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggle(this)">
+      <span><span class="faq-num">05</span>Does it work on Intel Macs?</span>
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Claw Back is optimized for Apple Silicon (M1, M2, M3, M4) and is tested primarily on Mac mini M4. That said, it runs on Intel Macs running macOS 14 (Sonoma) or later.</p>
+      <p>Performance will vary on Intel — local AI models (especially larger ones via Ollama) run significantly slower without the Neural Engine. For the best experience, we recommend Apple Silicon. M4 is the dream machine.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggle(this)">
+      <span><span class="faq-num">06</span>What is Ollama?</span>
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Ollama is an open-source tool that lets you run large language models (LLMs) — like Llama 3, Mistral, Gemma, and others — entirely on your own machine. No API keys. No cloud. No monthly usage limits.</p>
+      <p>It's the engine that powers local AI. Claw Back makes Ollama easy to install, manage, and restore if things go sideways. Think of Ollama as the car engine and Claw Back as the mechanic who keeps it running.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggle(this)">
+      <span><span class="faq-num">07</span>Can I use Claw Back on multiple Macs?</span>
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>It depends on your plan:</p>
+      <ul>
+        <li><strong>Monthly ($14.99/mo)</strong> — 1 Mac</li>
+        <li><strong>Annual ($99/yr)</strong> — Up to 2 Macs</li>
+      </ul>
+      <p>If you need more licenses for a team or additional machines, reach out at <a href="mailto:support@clawback.app">support@clawback.app</a> and we'll sort you out.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggle(this)">
+      <span><span class="faq-num">08</span>What happens after the 24-hour free trial?</span>
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>After 24 hours, your card is automatically charged $14.99 for the first month of the Monthly plan. You'll receive a reminder email before the trial ends.</p>
+      <p>If you cancel before the 24-hour mark, your card is not charged — no questions asked. To cancel, just email <a href="mailto:support@clawback.app">support@clawback.app</a>. We'll confirm cancellation within an hour during business hours.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggle(this)">
+      <span><span class="faq-num">09</span>How do I get support?</span>
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>We're real humans who answer emails. Reach us at:</p>
+      <ul>
+        <li>📧 <a href="mailto:support@clawback.app">support@clawback.app</a> — general support</li>
+        <li>📧 <a href="mailto:billing@clawback.app">billing@clawback.app</a> — billing issues</li>
+        <li>📧 <a href="mailto:privacy@clawback.app">privacy@clawback.app</a> — privacy questions</li>
+      </ul>
+      <p>Annual subscribers get priority support with faster response times. We typically respond within 24 hours on weekdays.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggle(this)">
+      <span><span class="faq-num">10</span>What macOS version do I need?</span>
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Claw Back requires macOS 14 (Sonoma) or later. We recommend staying on the latest macOS release for the best compatibility with Ollama and OpenClaw.</p>
+      <p>If you're running an older macOS version and it's working for you, we'd love to hear about it — email us at <a href="mailto:support@clawback.app">support@clawback.app</a>.</p>
+    </div>
+  </div>
+
+  <div class="still-questions">
+    <h2>Still have questions?</h2>
+    <p>We read every email. Seriously. Reach out and a real human will reply.</p>
+    <a href="mailto:support@clawback.app" class="btn-primary">📬 Email Support</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>🦞 Claw Back · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="faq.html">FAQ</a></p>
+  <p style="margin-top:8px;">© 2026 Claw Back. It takes back.</p>
+</footer>
+
+<script>
+function toggle(btn) {
+  var item = btn.closest('.faq-item');
+  var isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(el) { el.classList.remove('open'); });
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+
+</body>
+</html>
