@@ -4,35 +4,35 @@
 import PackageDescription
 
 let package = Package(
-    name: "ClawJesusPackage",
+    name: "ClawBackPackage",
     platforms: [
         .macOS(.v13)
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "ClawJesusCore",
-            targets: ["ClawJesusCore"]
+            name: "ClawBackCore",
+            targets: ["ClawBackCore"]
         ),
         .executable(
-            name: "ClawJesus",
-            targets: ["ClawJesus"]
+            name: "ClawBack",
+            targets: ["ClawBack"]
         )
     ],
     dependencies: [],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         .target(
-            name: "ClawJesusCore",
+            name: "ClawBackCore",
             dependencies: []
         ),
         .executableTarget(
-            name: "ClawJesus",
-            dependencies: ["ClawJesusCore"]
+            name: "ClawBack",
+            dependencies: ["ClawBackCore"]
         ),
         .testTarget(
-            name: "ClawJesusCoreTests",
-            dependencies: ["ClawJesusCore"]
+            name: "ClawBackCoreTests",
+            dependencies: ["ClawBackCore"]
         )
     ]
 )

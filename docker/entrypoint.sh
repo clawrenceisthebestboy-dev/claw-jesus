@@ -2,7 +2,7 @@
 set -e
 
 echo ""
-echo "  🦞 Claw Jesus — Docker Edition"
+echo "  🦞 Claw Back — Docker Edition"
 echo "  ================================"
 echo "  Your AI setup savior, now in a container."
 echo ""
@@ -24,7 +24,7 @@ echo "🚀 Starting OpenClaw gateway..."
 openclaw gateway start
 
 echo ""
-echo "✅ Claw Jesus is running!"
+echo "✅ Claw Back is running!"
 echo "   OpenClaw: http://localhost:3000"
 echo "   Ollama:   http://localhost:11434"
 echo ""

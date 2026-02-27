@@ -1,7 +1,7 @@
 FROM node:20-slim
 
-LABEL maintainer="Claw Jesus <clawjesus@clawjesus.ai>"
-LABEL description="Claw Jesus — One-click OpenClaw + Ollama setup in Docker"
+LABEL maintainer="Claw Back <clawback@clawback.ai>"
+LABEL description="Claw Back — One-click OpenClaw + Ollama setup in Docker"
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \

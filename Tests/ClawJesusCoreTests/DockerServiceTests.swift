@@ -1,5 +1,5 @@
 import XCTest
-@testable import ClawJesusCore
+@testable import ClawBackCore
 
 final class DockerServiceTests: XCTestCase {
     func testIsContainerRunning() {

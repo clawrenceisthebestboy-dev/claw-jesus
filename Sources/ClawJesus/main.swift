@@ -1,8 +1,8 @@
 import Foundation
-import ClawJesusCore
+import ClawBackCore
 
 @main
-struct ClawJesus {
+struct ClawBack {
     static func main() {
         let arguments = CommandLine.arguments
         

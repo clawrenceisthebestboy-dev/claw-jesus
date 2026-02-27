@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  claw-jesus:
-    image: clawjesus/claw-jesus:latest
-    container_name: claw-jesus
+  claw-back:
+    image: clawback/claw-back:latest
+    container_name: claw-back
     restart: unless-stopped
     ports:
       - "3000:3000"     # OpenClaw gateway
@@ -13,7 +13,7 @@ services:
       - ollama_data:/root/.ollama
     environment:
       - OLLAMA_MODEL=llama3.2        # Default model to pull on first run
-      - OPENCLAW_LICENSE=${OPENCLAW_LICENSE}  # Your Claw Jesus license key
+      - OPENCLAW_LICENSE=${OPENCLAW_LICENSE}  # Your Claw Back license key
     deploy:
       resources:
         reservations:
