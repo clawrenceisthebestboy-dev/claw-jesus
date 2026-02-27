@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  claw-jesus:
+    image: clawjesus/claw-jesus:latest
+    container_name: claw-jesus
+    restart: unless-stopped
+    ports:
+      - "3000:3000"     # OpenClaw gateway
+      - "11434:11434"   # Ollama API
+    volumes:
+      - openclaw_data:/root/.openclaw
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_MODEL=llama3.2        # Default model to pull on first run
+      - OPENCLAW_LICENSE=${OPENCLAW_LICENSE}  # Your Claw Jesus license key
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]   # Enable GPU if available
+
+volumes:
+  openclaw_data:
+  ollama_data:
